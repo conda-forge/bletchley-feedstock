@@ -10,19 +10,21 @@ source:
   sha256: df1a5d6c6820a5b989de3eba2a209e566ccdd315a0f80cf693beb623c2809cbf
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
     - numpy >=1.16.0
-    - python
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - bletchley
     - bletchley.ciphers
